@@ -1,0 +1,12 @@
+#!/system/bin/sh
+
+# Initialize sysctl
+
+if [ -f /system/etc/sysctl.conf ]; then
+   sysctl -p
+else
+   echo "/system/etc/sysctl.conf doesn't exist..."
+fi
+
+sync;
+setprop cm.filesystem.ready 1;

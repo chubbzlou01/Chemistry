@@ -1,0 +1,12 @@
+<?xml  version="1.0" encoding="UTF-8" ?>
+<SW-Configuration>
+	<MobileData>
+	<PublicName>SPH-L710</PublicName>
+	</MobileData>
+	<CustomerDataSet>
+	<CSCName>L710SPR</CSCName>
+	<CSCVersion>BLJ7</CSCVersion>
+	<NbCustomer>1</NbCustomer>
+	<CustomerData src="/Customer/SPR/customer.xml" />
+	</CustomerDataSet>
+</SW-Configuration>

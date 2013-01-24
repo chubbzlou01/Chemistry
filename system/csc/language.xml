@@ -1,0 +1,17 @@
+<SamsungMobileLanguage>
+   <Country>USA</Country>
+   <CountryISO>en</CountryISO>
+   <SalesCode>SPR</SalesCode>
+   <LanguageSet>
+          <Display>
+          en_US;es_US;ko_KR;
+          </Display>
+          <Input>
+                <SupportList>
+        	en_US;es;ko;
+                </SupportList>
+                <EnableList>
+                </EnableList>
+          </Input>
+   </LanguageSet>
+</SamsungMobileLanguage>

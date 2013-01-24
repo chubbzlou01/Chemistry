@@ -1,0 +1,170 @@
+#!/system/bin/sh
+
+#batt-diag
+#displays information necessary to debug the collin_ph battery tweak
+#may be piped to more, or sent to a text file.
+#you may upload batt-diag logs to joe@primoweb.com for diagnosis.
+
+echoit ()
+{
+echo "$1" | fold -s -w 45
+}
+who=`whoami`
+if [ "$who" != "root" ]
+ then
+ echoit "batt-diag must be ran as root."
+ echoit "Press enter to attempt to run as root"
+ echoit "Or press 1 then enter to continue without attempting to gain root access"
+ echoit ""
+ read opt
+ if [ "$opt" -eq "1" ] 
+  then
+	echoit "Continuing..."
+ else
+ echoit "Running batt-diag as root"
+ su -c "batt-diag"
+ echoit "Exited batt-diag as root"
+ exit
+ fi
+fi
+displayparm()
+{
+echo "$1"
+cat $1
+}
+echo "Collin_ph Battery diagnostic utility"
+echo "batt-diag -v for verbose diagnostics"
+echo "Checking if batt.sh service is running"
+out=`pidof batt.sh`
+echo "pidof batt.sh: $out"
+echo ""
+echo "Checking dependencies. If any dependency is blank the battery tweak may not function and should be disabled"
+out=`which sleep`
+echo "sleep: $out"
+out=`which mount`
+echo "mount: $out"
+out=`which expr`
+echo "expr : $out"
+out=`which log`
+echo "log : $out"
+echo ""
+echo "Checking tweak files and permissions"
+
+echo "Checking batt.sh service"
+out=`ls -l /system/bin/batt.sh`
+echo "$out"
+echo ""
+echo "Checking batt.conf configuration file"
+out=`ls -l /system/etc/batt.conf`
+echo "$out"
+echo ""
+echo "Checking batt-cfg configuration utility"
+out=`ls -l /system/bin/batt-cfg`
+echo "$out"
+echo ""
+echo "Checking batt-rm.sh service"	 	
+out=`ls -l /system/bin/batt-rm.sh`	 	
+echo "$out"
+echo ""
+
+echo "Checking Configuration"
+
+echo "----batt.conf file contents----"
+cat /system/etc/batt.conf
+echo "----end of batt.conf----"
+echo "----Mount points----"
+mount
+displayparm "/proc/mounts/"
+echo ""
+echo ""
+echo "Displaying CFS tweaks.----"	 	
+mount -t debugfs none /sys/kernel/debug	 	
+displayparm "/sys/kernel/debug/sched_features" 	
+displayparm "/proc/sys/kernel/sched_latency_ns"	 	
+displayparm "/proc/sys/kernel/sched_min_granularity_ns"	 	
+displayparm "/proc/sys/kernel/sched_wakeup_granularity_ns"	 	
+umount /sys/kernel/debug	 	
+echo ""	 	
+echo ""	 	
+echo ""
+echo "Displaying Current CPU scheduler and Scaling Governor"
+echo "Scaling Governor:"
+displayparm "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+echo "CPU scheduler:"
+displayparm "/sys/block/mtdblock3/queue/scheduler"
+echo ""
+echo ""
+echo ""
+echo "Displaying Batt.sh tweakables.----"
+
+
+displayparm "/proc/sys/vm/swappiness"
+displayparm "/proc/sys/vm/dirty_expire_centisecs"
+displayparm "/proc/sys/vm/dirty_writeback_centisecs"
+displayparm "/proc/sys/vm/dirty_background_ratio"
+displayparm "/proc/sys/vm/dirty_ratio"
+displayparm "/proc/sys/vm/vfs_cache_pressure"
+displayparm "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq"
+displayparm "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq"
+displayparm "/sys/devices/system/cpu/cpu0/cpufreq/ondemand/up_threshold"
+displayparm "/sys/devices/system/cpu/cpu0/cpufreq/ondemand/powersave_bias"
+echo "Current charging source: 0=Battery 1=USB 2=AC"
+displayparm "/sys/class/power_supply/battery/charging_source"
+echo "Current battery capacity"
+displayparm "/sys/class/power_supply/battery/capacity"
+displayparm "/sys/class/power_supply/battery/health"
+
+echo ""
+echo "----Current Battery Temp----"
+tmp=`cat /sys/class/power_supply/battery/batt_temp`
+c=`expr "$tmp" "/" 10`
+f=`expr "$tmp" "*" 18`
+f=`expr "$f" "/" 100`
+f=`expr "$f" "+" 32`
+
+echo " $f F / $c C"
+echo "----End of Battery Temp----"
+
+echo ""
+echo "----ROM Version----"
+cat /proc/version
+echo "----End of ROM Version ----"
+echo ""
+echo "---CPU Time in each Frequency---"
+cat /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state
+echo "---End of CPU Time in each Frequency----"
+echo ""
+
+if [ "$1" = "-v" ]
+   then
+	 echo "Displaying Verbose Settings."
+	 echo "----System Properties----"
+	 getprop
+	 echo "----End of System Properties----"
+   echo "----Running Tasks----"
+   out=`which top`
+	 if [ "$out" ]
+	    then
+			top -n 1
+			else
+			ps
+	 fi
+	 echo "----End of Running tasks----"
+         echo ""
+	 echo "----CPU info----"
+	 cat /proc/cpuinfo
+	 echo "----End of CPU info----"
+         echo ""
+   echo "----Schedular Stats----"
+	 cat /proc/schedstat
+	 echo "----End of Schedular Stats----"
+         echo ""
+	 echo "----Swaps----"
+	 cat /proc/swaps
+	 echo "----End of Swaps----"
+         echo ""
+	 echo "----MSM PM Stats----"
+	 cat /proc/msm_pm_stats
+	 echo "----End of PM Stats----"
+fi
+	 

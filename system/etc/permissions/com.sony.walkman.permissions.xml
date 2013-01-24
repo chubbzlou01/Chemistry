@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012 Sony Corporation -->
+<permissions>
+  <permission name="com.sony.walkman.permission.ACCESS_MEDIA">
+   <group gid="wmmedia" />
+  </permission>
+</permissions>

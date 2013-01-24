@@ -1,0 +1,103 @@
+#!/system/bin/sh
+
+# Reduce SSD usage
+busybox mount -o remount,noatime,noauto_da_alloc,nodiratime,barrier=0,nobh /system
+busybox mount -o remount,noatime,noauto_da_alloc,nosuid,nodev,nodiratime,barrier=0,nobh /data
+busybox mount -o remount,noatime,noauto_da_alloc,nosuid,nodev,nodiratime,barrier=0,nobh /cache
+
+# Set memory blocks as rotational
+echo "0" > /sys/block/mmcblk0/queue/rotational;
+echo "512" > /sys/block/mmcblk0/queue/nr_requests;
+echo "2048" > /sys/block/mmcblk0/queue/read_ahead_kb;
+echo "0" > /sys/block/mmcblk1/queue/rotational;
+echo "512" > /sys/block/mmcblk1/queue/nr_requests;
+echo "2048" > /sys/block/mmcblk1/queue/read_ahead_kb;
+
+# Sysctl
+echo "500" > /proc/sys/vm/dirty_expire_centisecs;
+echo "1000" > /proc/sys/vm/dirty_writeback_centisecs
+
+# Defrag Database
+for i in \
+`busybox find /data -iname "*.db"`; 
+do \
+    /system/xbin/sqlite3 $i 'VACUUM;'; 
+    /system/xbin/sqlite3 $i 'REINDEX;'; 
+done;
+
+if [ -d "/dbdata" ]; then
+    for i in \
+    `busybox find /dbdata -iname "*.db"`; 
+    do \
+        /system/xbin/sqlite3 $i 'VACUUM;'; 
+        /system/xbin/sqlite3 $i 'REINDEX;'; 
+    done;
+fi;
+
+
+if [ -d "/datadata" ]; then
+    for i in \
+    `busybox find /datadata -iname "*.db"`; 
+    do \
+        /system/xbin/sqlite3 $i 'VACUUM;'; 
+        /system/xbin/sqlite3 $i 'REINDEX;'; 
+    done;
+fi;
+
+
+for i in \
+`busybox find /sdcard -iname "*.db"`; 
+do \
+    /system/xbin/sqlite3 $i 'VACUUM;'; 
+    /system/xbin/sqlite3 $i 'REINDEX;'; 
+done;
+
+# Bind cache
+CACHESIZE=$(df -k /cache | tail -n1 | tr -s ' ' | cut -d ' ' -f2)
+DATAONLY=$(getprop dalvik.vm.dexopt-data-only)
+if [ "$DATAONLY" = "1" ]
+then
+  NEEDED=60000
+else
+  NEEDED=105000
+fi;
+
+if [ $CACHESIZE -lt $NEEDED ]
+then
+  mount -o bind /data/local/download /cache/download;
+fi;
+
+rm /cache/download/downloadfile*.apk >/dev/null 2>&1;
+
+sync;
+
+
+# No data logging
+if [ -e /data/data/com.google.android.gsf/databases/gservices.db ]; then
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 'false' where name = 'perform_market_checkin' and value = 'true'";
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 'false' where name = 'checkin_dropbox_upload:system_update' and value = 'true'"
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 0 where name = 'market_force_checkin' and value = -1"
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 0 where name = 'checkin_interval'"
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 0 where name = 'secure:bandwidth_checkin_stat_interval'"
+fi;
+chmod 0444 /data/system/appusagestats
+chmod 0444 /data/system/dropbox
+chmod 0444 /data/system/usagestats
+chmod 0000 /data/system/userbehavior.db
+chmod 0000 /data/system/userbehavior.db-shm
+chmod 0000 /data/system/userbehavior.db-wal
+chmod 0000 /data/system/userbehavior.xml
+
+if [ ! -f "/system/etc/passwd" ]; then
+  echo "root::0:0:root:/data/local:/system/bin/sh" > /system/etc/passwd
+  chmod 0666 /system/etc/passwd
+fi
+if [ ! -f "/system/etc/group" ]; then
+  echo "root::0:" > /system/etc/group
+  chmod 0666 /system/etc/group
+fi
+
+rm /data/system/appusagestats/*
+rm /data/system/dropbox/*
+rm /data/system/usagestats/*
+rm /data/tombstones/*
