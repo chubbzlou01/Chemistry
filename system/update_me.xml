@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<RomConfig>
+
+    <RomName>Chemistry_V4</RomName>
+
+    <RomVersion>1.0.0</RomVersion>
+
+    <RomCheckUrl>https://www.dropbox.com/s/v3rc8ezxgy5smqw/update_me_ckeck.xml</RomCheckUrl>
+
+    <CheckMD5>0</CheckMD5>
+    <DownloadDir>/mnt/sdcard/Chemistry-Updates</DownloadDir>
+    <RebootRecovery>1</RebootRecovery>
+
+</RomConfig>

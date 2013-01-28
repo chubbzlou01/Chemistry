@@ -1,0 +1,7 @@
+#!/system/bin/sh
+#ThunderBolt!
+sync;
+echo 3 > /proc/sys/vm/drop_caches;
+sleep 1;
+echo 0 > /proc/sys/vm/drop_caches;
+echo "Caches are dropped!";

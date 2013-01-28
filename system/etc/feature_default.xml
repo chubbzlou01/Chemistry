@@ -90,6 +90,7 @@ jhwan.kim@hdlnc.com  -->
 <CscFeature_Message_SplitMode>true</CscFeature_Message_SplitMode>
 
 <CscFeature_Message_CBMessage>true</CscFeature_Message_CBMessage>
+<CscFeature_Message_EnableManageSimMessages>true</CscFeature_Message_EnableManageSimMessages>
 <CscFeature_Message_VibrateWhen>never</CscFeature_Message_VibrateWhen>
 <CscFeature_Message_Priority>normal</CscFeature_Message_Priority>
 <CscFeature_Message_EnableFontSizeByVolumeKey>true</CscFeature_Message_EnableFontSizeByVolumeKey>

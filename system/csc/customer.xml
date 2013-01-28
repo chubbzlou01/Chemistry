@@ -44,12 +44,7 @@
 
         </DateTimeFormat>
       </Phone>
-      <Network>
-        <WbAmr>
-          <NetworkName>Sprint</NetworkName>
-          <WbAmrCodec>on</WbAmrCodec>
-        </WbAmr>
-	  </Network>
+
     </Main>
 
     <Messages>
@@ -68,7 +63,7 @@
           <ReqDeliveryRep>off</ReqDeliveryRep>
           <ReqReadRep>off</ReqReadRep>
           <MessageSize>5m</MessageSize>
-          <ImageResizeResolution>uxga</ImageResizeResolution>
+          <ImageResizeResolution>hxga</ImageResizeResolution>
           <CreationMode>free</CreationMode>
         </MmsSending>
       </MMS>

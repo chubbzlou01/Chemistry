@@ -2,32 +2,24 @@ ui_print("");
 ui_print("");
 ui_print("");
 ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");	   
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print("");
-ui_print(" ============================================= ");
-ui_print("|                                             |");
-ui_print("|      welcome to sac23,gruesomewolf,         |");
-ui_print("|        and chubbz      s3 rom               |");
-ui_print("|          your in for a treat                |");
-ui_print("|    Please Be Patient On First Boot          |");
-ui_print(" ============================================= ");
-ui_print("");
-ui_print("");
-ui_print("");
+ui_print("   
+                 WELCOME TO   
+      _                 _      _              
+  __ | |_   ___  _ __  (_) ___| |_  _ _  _  _ 
+ / _|| ' \ / -_)| '  \ | |(_-<|  _|| '_|| || |
+ \__||_||_|\___||_|_|_||_|/__/ \__||_|   \_, |
+                _ _  ___  _ __           |__/ 
+               | '_|/ _ \| '  \                             
+               |_|  \___/|_|_|_|                            
+                 
 
-ui_print("");
+              BROUGHT TO YOU BY: 
+   
+          Sac23,Gruesomewolf,Chubbz
+
+
+                       
+");
 run_program("/sbin/mount", "/cache");
 show_progress(0.500000, 0);
 ui_print("::: Mounting system");
@@ -42,8 +34,9 @@ set_perm(1000, 1000, 0771, "/data/app");
 set_perm(0, 1000, 0755, "/system/xbin/busybox");
 symlink("/system/xbin/busybox", "/system/bin/busybox");
 set_progress(0.50);
-ui_print(" ");
-ui_print(" ");
+ui_print("");
+ui_print("");
+ui_print("");
 ui_print("::: Symlinking");
 symlink("busybox", "/system/xbin/[");
 symlink("busybox", "/system/xbin/[[");
@@ -441,7 +434,9 @@ set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
 set_perm(0, 0, 06755, "/system/bin/su");
 symlink("/system/bin/su", "/system/xbin/su");
 show_progress(0.100000, 0);
-
+ui_print("");
+ui_print("");
+ui_print("");
 ui_print("Setting Permissions To ThunderBolt! files...");
 set_perm_recursive(0, 2000, 0777, 0777, "/system/etc/init.d");
 set_perm(0, 0, 0777, "/system/xbin/sqlite3");
@@ -456,10 +451,17 @@ set_perm(0, 0, 0777, "/system/etc/init.d/drop");
 set_perm(0, 0, 0777, "/system/etc/init.d/cpugputune");
 set_perm(0, 0, 0777, "/system/etc/init.d/S98TCPbuffers");
 set_perm(0, 0, 0777, "/system/etc/init.d/s91ecn");
-set_perm(0, 0, 0777, "/system/etc/init.d/leos");
 ui_print("");
 ui_print("Done With ThunderBolt Files...");
-
+ui_print("");
+ui_print("");
+ui_print("");
+ui_print("Setting Permissions To Crystal Clear! files...");
+set_perm(0, 0, 0777, "/system/etc/init.d/99crystal_clear");
+ui_print("");
+ui_print("");
+ui_print("");
+ui_print("");
 ui_print("Installing the Kernel");
 assert(package_extract_file("boot.img", "/tmp/boot.img"),
        write_raw_image("/tmp/boot.img", "/dev/block/mmcblk0p7"),

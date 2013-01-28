@@ -245,7 +245,7 @@ jhwan.kim@hdlnc.com  -->
 <CscFeature_Contact_DisableMessageLog>false</CscFeature_Contact_DisableMessageLog>
 <CscFeature_Contact_DisableMenuAddToRejectList>false</CscFeature_Contact_DisableMenuAddToRejectList>
 <CscFeature_Contact_DisableMenuSimExportImport>true</CscFeature_Contact_DisableMenuSimExportImport>
-<CscFeature_Contact_SetLinkCountMaxAs>30</CscFeature_Contact_SetLinkCountMaxAs
+<CscFeature_Contact_SetLinkCountMaxAs>30</CscFeature_Contact_SetLinkCountMaxAs>
 
 <!-- Calendar -->
 <CscFeature_Calendar_SetColorOfDays>XXXXXXX</CscFeature_Calendar_SetColorOfDays>
@@ -269,9 +269,9 @@ jhwan.kim@hdlnc.com  -->
 
 <!-- RIL -->
 <CscFeature_RIL_DisplayPlmnByLURejectCause>true</CscFeature_RIL_DisplayPlmnByLURejectCause>
-<CscFeature_RIL_DisableSimToolKitCmds>true</CscFeature_RIL_DisableSimToolKitCmds>
+<CscFeature_RIL_DisableSimToolKitCmds>LaunchBrowser</CscFeature_RIL_DisableSimToolKitCmds>
 <CscFeature_RIL_EnableTotalCallTime>true</CscFeature_RIL_EnableTotalCallTime>
-<CscFeature_RIL_EnableCallBlock4TDF>true</CscFeature_RIL_EnableCallBlock4TDF>
+<CscFeature_RIL_EnableCallBlock4TDF></CscFeature_RIL_EnableCallBlock4TDF>
 <!-- Setup -->
 <CscFeature_Setting_SkipWifiActvDuringSetupWizard>false</CscFeature_Setting_SkipWifiActvDuringSetupWizard>
 
@@ -293,11 +293,10 @@ jhwan.kim@hdlnc.com  -->
 <CscFeature_Setting_EnableConversion4MEIDAndESN>true</CscFeature_Setting_EnableConversion4MEIDAndESN>
 <CscFeature_Setting_EnableRoamingMenu>true</CscFeature_Setting_EnableRoamingMenu>
 <CscFeature_Setting_DisableNetworkMode>false</CscFeature_Setting_DisableNetworkMode>
-<CscFeature_Setting_EnableNetworkModeOnBoot>true</CscFeature_Setting_EnableNetworkModeOnBoot>
 <CscFeature_Setting_EnableMenuDownloadContents>true</CscFeature_Setting_EnableMenuDownloadContents>
 <CscFeature_Setting_EditOption4ApnType>true</CscFeature_Setting_EditOption4ApnType>
 <CscFeature_Setting_EnableEditingIpVersionType>true</CscFeature_Setting_EnableEditingIpVersionType>
-<CscFeature_Setting_DisableMenuBearerInApnEdit>true</CscFeature_Setting_DisableMenuBearerInApnEdit>
+<CscFeature_Setting_DisableMenuBearerInApnEdit>false</CscFeature_Setting_DisableMenuBearerInApnEdit>
 <CscFeature_Setting_RemoveDisableButtonInAppMgr>false</CscFeature_Setting_RemoveDisableButtonInAppMgr>
 
 <!-- WiFi -->
@@ -330,7 +329,7 @@ jhwan.kim@hdlnc.com  -->
 <CscFeature_Web_Bool_DisableSaveLink>false</CscFeature_Web_Bool_DisableSaveLink>
 <CscFeature_Web_Bool_EnableGateConfig>false</CscFeature_Web_Bool_EnableGateConfig>
 <CscFeature_Web_Bool_OverrideUserAgent>false</CscFeature_Web_Bool_OverrideUserAgent>
-<CscFeature_Web_Bool_EnableClearTodayHistory>false</CscFeature_Web_Bool_EnableClearTodayHistory>
+<CscFeature_Web_Bool_EnableClearTodayHistory>true</CscFeature_Web_Bool_EnableClearTodayHistory>
 <CscFeature_Web_Bool_BlockChargeAtHighTemperature>true</CscFeature_Web_Bool_BlockChargeAtHighTemperature>
 
 <!-- AppFW -->

@@ -1,0 +1,61 @@
+#!/system/bin/sh
+
+#Set Crystal_clear
+
+mount -t debugfs debugfs /sys/kernel/debug
+
+echo 4 >/sys/kernel/debug/msm_fb/0/backbuff
+
+echo 4 >/sys/kernel/debug/msm_fb/1/backbuff
+
+echo 4 >/sys/kernel/debug/msm_fb/2/backbuff
+
+
+echo 32 >/sys/kernel/debug/msm_fb/0/bpp
+
+echo 32 >/sys/kernel/debug/msm_fb/1/bpp
+
+echo 32 >/sys/kernel/debug/msm_fb/2/bpp
+
+
+echo 12 >/sys/kernel/debug/msm_fb/1/fb_imgType
+
+echo 12 >/sys/kernel/debug/msm_fb/2/fb_imgType
+
+
+echo 8 >/sys/kernel/debug/msm_fb/1/type
+
+echo 8 >/sys/kernel/debug/msm_fb/2/type
+
+echo 1 >/sys/kernel/debug/clk/mdp_vsync_clk/enable
+
+echo 0 >/sys/kernel/debug/msm_fb/1/panel_power_on
+
+echo 0 >/sys/kernel/debug/msm_fb/2/panel_power_on
+
+echo 1 >/sys/kernel/debug/msm_fb/1/op_enable
+
+echo 1 >/sys/kernel/debug/msm_fb/2/op_enable
+
+echo 1 >/sys/kernel/debug/msm_fb/2/vsync_enable
+
+echo 3 >/sys/kernel/debug/msm_fb/2/hw_vsync_mode
+
+echo 1 >/sys/kernel/debug/msm_fb/2/vsync_notifier_period
+
+
+echo 10 >/sys/kernel/debug/msm_fb/mddi_msg_printing_level
+
+echo 10 >/sys/kernel/debug/msm_fb/msm_fb_msg_printing_level
+
+echo 1 >/sys/kernel/debug/msm_fb/mdp/mdp_current_clk_on
+
+echo 1 >/sys/kernel/debug/msm_fb/mdp/dma2_update_time_in_usec
+
+# mpdecision - kernel support
+
+echo 1 >/sys/kernel/msm_mpdecision/conf/enabled
+
+
+
+
