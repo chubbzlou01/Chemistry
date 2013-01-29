@@ -131,6 +131,7 @@ jhwan.kim@hdlnc.com  -->
 <CscFeature_Message_CliDigit>0</CscFeature_Message_CliDigit>
 <CscFeature_Message_EnableExtendSlideTimeToMediaDuration>true</CscFeature_Message_EnableExtendSlideTimeToMediaDuration>
 <CscFeature_Message_EnableSmsForwardPrefix>true</CscFeature_Message_EnableSmsForwardPrefix>
+<CscFeature_Message_EnableMultiLockMenu>true</CscFeature_Message_EnableMultiLockMenu>
 <CscFeature_Message_SmsDiscardPrefix>//</CscFeature_Message_SmsDiscardPrefix>
 <CscFeature_Message_CMASSetPresidentialAsFirstPriority>true</CscFeature_Message_CMASSetPresidentialAsFirstPriority>
 <CscFeature_Message_CMASThreadMethod>false</CscFeature_Message_CMASThreadMethod>
